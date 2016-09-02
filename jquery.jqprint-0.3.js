@@ -18,8 +18,8 @@
         opt = $.extend({}, $.fn.jqprint.defaults, options);
 
         var $element = (this instanceof jQuery) ? this : $(this);
-        
-        if (opt.operaSupport && $.browser.opera) 
+        var isOpera = window.navigator.userAgent.indexOf('opera') > -1;
+        if (opt.operaSupport && isOpera) 
         { 
             var tab = window.open("","jqPrint-preview");
             tab.document.open();
@@ -57,8 +57,8 @@
         
         doc.close();
         
-        (opt.operaSupport && $.browser.opera ? tab : $iframe[0].contentWindow).focus();
-        setTimeout( function() { (opt.operaSupport && $.browser.opera ? tab : $iframe[0].contentWindow).print(); if (tab) { tab.close(); } }, 1000);
+        (opt.operaSupport && isOpera ? tab : $iframe[0].contentWindow).focus();
+        setTimeout( function() { (opt.operaSupport && isOpera ? tab : $iframe[0].contentWindow).print(); if (tab) { tab.close(); } }, 1000);
     }
     
     $.fn.jqprint.defaults = {
